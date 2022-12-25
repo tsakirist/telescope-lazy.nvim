@@ -84,9 +84,13 @@ function M.lazy_plugins_picker()
 
   local function attach_mappings(prompt_bufnr, map)
     lazy_actions.default_action_replace(prompt_bufnr)
-    map("i", opts.mappings.open_in_browser, lazy_actions.open_in_browser)
-    map("i", opts.mappings.open_in_find_files, lazy_actions.open_in_find_files)
-    map("i", opts.mappings.open_in_live_grep, lazy_actions.open_in_live_grep)
+
+    for mode in { "i", "n" } do
+      map(mode, opts.mappings.open_in_browser, lazy_actions.open_in_browser)
+      map(mode, opts.mappings.open_in_find_files, lazy_actions.open_in_find_files)
+      map(mode, opts.mappings.open_in_live_grep, lazy_actions.open_in_live_grep)
+    end
+
     return true
   end
 

@@ -18,7 +18,11 @@ local function attach_mappings(_, map)
   local function open_plugins_picker()
     builtin.resume({ picker = M.cached_search_plugins_picker })
   end
-  map("i", config.opts.mappings.open_plugins_picker, open_plugins_picker)
+
+  for _, mode in ipairs({ "i", "n" }) do
+    map(mode, config.opts.mappings.open_plugins_picker, open_plugins_picker)
+  end
+
   return true
 end
 

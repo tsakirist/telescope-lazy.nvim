@@ -39,7 +39,7 @@ require("telescope").setup({
         open_in_browser = "<C-o>",
         open_in_find_files = "<C-f>",
         open_in_live_grep = "<C-g>",
-        open_plugins_picker = "<C-b>",
+        open_plugins_picker = "<C-b>", -- Works only after having called first open_in_find_files or open_in_live_grep
       },
       -- Other telescope configuration options
     },
@@ -55,12 +55,12 @@ require("telescope").load_extension "lazy"
 
 ## Available mappings
 
-| Mappings | Action                            |
-| -------- | --------------------------------- |
-| `<C-o>`  | Open plugin repository in browser |
-| `<C-f>`  | Open plugin with find files       |
-| `<C-g>`  | Open plugin with live grep        |
-| `<C-b>`  | Open lazy plugins picker          |
+| Mappings | Action                                                                |
+| -------- | --------------------------------------------------------------------- |
+| `<C-o>`  | Open plugin repository in browser                                     |
+| `<C-f>`  | Open plugin with find files                                           |
+| `<C-g>`  | Open plugin with live grep                                            |
+| `<C-b>`  | Open lazy plugins picker after having called first `<C-f>` or `<C-g>` |
 
 ## Acknowledgments
 

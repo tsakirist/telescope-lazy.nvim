@@ -18,9 +18,7 @@ local function attach_mappings(_, map)
   local function open_plugins_picker()
     builtin.resume({ picker = M.cached_search_plugins_picker })
   end
-
   map({ "i", "n" }, config.opts.mappings.open_plugins_picker, open_plugins_picker)
-
   return true
 end
 

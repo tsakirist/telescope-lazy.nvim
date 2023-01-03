@@ -6,13 +6,13 @@ local finders = require("telescope.finders")
 local pickers = require("telescope.pickers")
 local previewers = require("telescope.previewers")
 
-local lazy_actions = require("telescope._extensions.lazy.actions")
-local lazy_config = require("telescope._extensions.lazy.config")
-local lazy_plugins = require("telescope._extensions.lazy.plugins").plugins()
+local telescope_lazy_actions = require("telescope._extensions.lazy.actions")
+local telescope_lazy_config = require("telescope._extensions.lazy.config")
+local telescope_lazy_plugins = require("telescope._extensions.lazy.plugins").plugins()
 
-local function max_plugin_name_width()
+local function get_max_plugin_name_width()
   local max_plugin_name_width = 0
-  for _, plugin in ipairs(lazy_plugins) do
+  for _, plugin in ipairs(telescope_lazy_plugins) do
     if #plugin.name > max_plugin_name_width then
       max_plugin_name_width = #plugin.name
     end
@@ -21,11 +21,11 @@ local function max_plugin_name_width()
 end
 
 function M.lazy_plugins_picker()
-  local opts = lazy_config.opts
+  local opts = telescope_lazy_config.opts
 
   local function displayer()
     local items = {
-      { width = max_plugin_name_width() },
+      { width = get_max_plugin_name_width() },
       { remaining = true },
     }
 
@@ -77,16 +77,16 @@ function M.lazy_plugins_picker()
 
   local function finder()
     return finders.new_table({
-      results = lazy_plugins,
+      results = telescope_lazy_plugins,
       entry_maker = entry_maker,
     })
   end
 
   local function attach_mappings(prompt_bufnr, map)
-    lazy_actions.default_action_replace(prompt_bufnr)
-    map({ "i", "n" }, opts.mappings.open_in_browser, lazy_actions.open_in_browser)
-    map({ "i", "n" }, opts.mappings.open_in_find_files, lazy_actions.open_in_find_files)
-    map({ "i", "n" }, opts.mappings.open_in_live_grep, lazy_actions.open_in_live_grep)
+    telescope_lazy_actions.default_action_replace(prompt_bufnr)
+    map({ "i", "n" }, opts.mappings.open_in_browser, telescope_lazy_actions.open_in_browser)
+    map({ "i", "n" }, opts.mappings.open_in_find_files, telescope_lazy_actions.open_in_find_files)
+    map({ "i", "n" }, opts.mappings.open_in_live_grep, telescope_lazy_actions.open_in_live_grep)
     return true
   end
 

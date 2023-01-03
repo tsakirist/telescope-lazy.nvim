@@ -5,8 +5,9 @@ local actions_state = require("telescope.actions.state")
 local builtin = require("telescope.builtin")
 local state = require("telescope.state")
 
-local config = require("telescope._extensions.lazy.config")
+local telescope_lazy_config = require("telescope._extensions.lazy.config")
 
+-- The first picker that is cached in order to be easily re-opened on demand
 M.cached_search_plugins_picker = nil
 
 local function cache_search_plugins_picker()
@@ -18,7 +19,7 @@ local function attach_mappings(_, map)
   local function open_plugins_picker()
     builtin.resume({ picker = M.cached_search_plugins_picker })
   end
-  map({ "i", "n" }, config.opts.mappings.open_plugins_picker, open_plugins_picker)
+  map({ "i", "n" }, telescope_lazy_config.opts.mappings.open_plugins_picker, open_plugins_picker)
   return true
 end
 
@@ -37,7 +38,7 @@ function M.open_in_browser()
     vim.notify(
       ("Open in browser is not supported by your operating system. (os: %s)"):format(os),
       vim.log.levels.ERROR,
-      { title = config.extension_name }
+      { title = telescope_lazy_config.extension_name }
     )
   else
     local selected_entry = actions_state.get_selected_entry()
@@ -46,7 +47,7 @@ function M.open_in_browser()
       vim.notify(
         string.format("Failed to open '%s'\nwith command: '%s' (ret: %d)", selected_entry.url, open_cmd, ret),
         vim.log.levels.ERROR,
-        { title = config.extension_name }
+        { title = telescope_lazy_config.extension_name }
       )
     end
   end
@@ -82,7 +83,7 @@ function M.default_action_replace(prompt_bufnr)
       vim.notify(
         "Could not perform action. Readme file doesn't exist.",
         vim.log.levels.ERROR,
-        { title = config.extension_name }
+        { title = telescope_lazy_config.extension_name }
       )
     end
   end)

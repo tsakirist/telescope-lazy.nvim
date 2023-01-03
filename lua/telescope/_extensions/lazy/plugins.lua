@@ -2,7 +2,7 @@ if not pcall(require, "lazy") then
   error("This extension requires 'lazy.nvim'. (https://github.com/folke/lazy.nvim)")
 end
 
-local config = require("lazy.core.config")
+local lazy_config = require("lazy.core.config")
 local util = require("telescope._extensions.lazy.utils")
 
 local M = {}
@@ -41,9 +41,9 @@ end
 function M.plugins()
   local plugins = {}
 
-  for _, plugin in pairs(config.plugins) do
+  for _, plugin in pairs(lazy_config.plugins) do
     local plugin_name = plugin.name
-    local plugin_path = util.join_paths(config.options.root, plugin_name)
+    local plugin_path = util.join_paths(lazy_config.options.root, plugin_name)
     local plugin_readme = find_readme(plugin_path)
     local plugin_url = plugin.url
     local plugin_lazy = plugin.lazy

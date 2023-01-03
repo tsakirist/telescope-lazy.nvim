@@ -87,6 +87,8 @@ function M.lazy_plugins_picker()
     map({ "i", "n" }, opts.mappings.open_in_browser, telescope_lazy_actions.open_in_browser)
     map({ "i", "n" }, opts.mappings.open_in_find_files, telescope_lazy_actions.open_in_find_files)
     map({ "i", "n" }, opts.mappings.open_in_live_grep, telescope_lazy_actions.open_in_live_grep)
+    map({ "i", "n" }, opts.mappings.open_lazy_root_find_files, telescope_lazy_actions.open_lazy_root_find_files)
+    map({ "i", "n" }, opts.mappings.open_lazy_root_live_grep, telescope_lazy_actions.open_lazy_root_live_grep)
     return true
   end
 

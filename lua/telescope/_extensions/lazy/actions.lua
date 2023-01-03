@@ -6,6 +6,7 @@ local builtin = require("telescope.builtin")
 local state = require("telescope.state")
 
 local telescope_lazy_config = require("telescope._extensions.lazy.config")
+local lazy_options = require("lazy.core.config").options
 
 -- The first picker that is cached in order to be easily re-opened on demand
 M.cached_search_plugins_picker = nil
@@ -51,6 +52,22 @@ function M.open_in_browser()
       )
     end
   end
+end
+
+function M.open_lazy_root_find_files()
+  builtin.find_files({
+    prompt_title = "Find files in lazy root",
+    cwd = lazy_options.root,
+    attach_mappings = attach_mappings,
+  })
+end
+
+function M.open_lazy_root_live_grep()
+  builtin.live_grep({
+    prompt_title = "Grep files in lazy root",
+    cwd = lazy_options.root,
+    attach_mappings = attach_mappings,
+  })
 end
 
 function M.open_in_find_files()

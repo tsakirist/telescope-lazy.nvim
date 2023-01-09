@@ -25,19 +25,20 @@ local function attach_mappings(_, map)
 end
 
 function M.open_in_browser()
-  local os = vim.loop.os_uname().sysname
   local open_cmd
-  if os == "Linux" then
+  if vim.fn.executable("xdg-open") == 1 then
     open_cmd = "xdg-open"
-  elseif os == "Windows" then
+  elseif vim.fn.executable("explorer") == 1 then
     open_cmd = "explorer"
-  elseif os == "Darwin" then
+  elseif vim.fn.executable("open") == 1 then
     open_cmd = "open"
+  elseif vim.fn.executable("wslview") == 1 then
+    open_cmd = "wslview"
   end
 
   if not open_cmd then
     vim.notify(
-      ("Open in browser is not supported by your operating system. (os: %s)"):format(os),
+      "Open in browser is not supported by your operating system.",
       vim.log.levels.ERROR,
       { title = telescope_lazy_config.extension_name }
     )
@@ -46,7 +47,7 @@ function M.open_in_browser()
     local ret = vim.fn.jobstart(open_cmd .. " " .. selected_entry.url, { detach = true })
     if ret <= 0 then
       vim.notify(
-        string.format("Failed to open '%s'\nwith command: '%s' (ret: %d)", selected_entry.url, open_cmd, ret),
+        string.format("Failed to open '%s'\nwith command: '%s' (ret: '%d')", selected_entry.url, open_cmd, ret),
         vim.log.levels.ERROR,
         { title = telescope_lazy_config.extension_name }
       )

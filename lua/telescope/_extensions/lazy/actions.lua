@@ -44,7 +44,7 @@ function M.open_in_browser()
     )
   else
     local selected_entry = actions_state.get_selected_entry()
-    local ret = vim.fn.jobstart(open_cmd .. " " .. selected_entry.url, { detach = true })
+    local ret = vim.fn.jobstart({ open_cmd, selected_entry.url }, { detach = true })
     if ret <= 0 then
       vim.notify(
         string.format("Failed to open '%s'\nwith command: '%s' (ret: '%d')", selected_entry.url, open_cmd, ret),

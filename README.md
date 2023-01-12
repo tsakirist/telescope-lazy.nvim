@@ -19,7 +19,7 @@ provides handy functionality about plugins installed via
 ### Lazy
 
 ```lua
-{ "tsakirist/telescope-lazy.nvim", dependencies = "nvim-telescope/telescope.nvim" }
+{ "nvim-telescope/telescope.nvim", dependencies = "tsakirist/telescope-lazy.nvim" }
 ```
 
 ## Configuration

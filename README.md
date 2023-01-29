@@ -8,11 +8,16 @@ provides handy functionality about plugins installed via
 
 [Demo.webm](https://user-images.githubusercontent.com/20475201/209448481-84bbd8a5-9d42-46be-bc46-18a481803474.webm)
 
-
 ## Requirements
+
+Required:
 
 - [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)
 - [lazy.nvim](https://github.com/folke/lazy.nvim)
+
+Optional:
+
+- [telescope-file-browser.nvim](https://github.com/nvim-telescope/telescope-file-browser.nvim)
 
 ## Installation
 
@@ -37,6 +42,7 @@ require("telescope").setup({
       -- Mappings for the actions
       mappings = {
         open_in_browser = "<C-o>",
+        open_in_file_browser = "<M-b>",
         open_in_find_files = "<C-f>",
         open_in_live_grep = "<C-g>",
         open_plugins_picker = "<C-b>", -- Works only after having called first another action
@@ -60,6 +66,7 @@ require("telescope").load_extension "lazy"
 | Mappings | Action                                                                        |
 | -------- | ----------------------------------------------------------------------------- |
 | `<C-o>`  | Open selected plugin repository in browser                                    |
+| `<M-b>`  | Open selected plugin with file-browser                                        |
 | `<C-f>`  | Open selected plugin with find files                                          |
 | `<C-g>`  | Open selected plugin with live grep                                           |
 | `<C-b>`  | Open lazy plugins picker, works only after having called first another action |

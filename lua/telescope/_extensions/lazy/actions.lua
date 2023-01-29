@@ -79,6 +79,24 @@ function M.open_in_live_grep()
   })
 end
 
+function M.open_in_file_browser()
+  local ok, file_browser = pcall(require, "telescope._extensions.file_browser")
+  if not ok then
+    vim.notify(
+      "This action requires 'telescope-file-browser.nvim'. (https://github.com/nvim-telescope/telescope-file-browser.nvim)",
+      vim.log.levels.ERROR,
+      { title = telescope_lazy_config.extension_name }
+    )
+    return
+  end
+  local selected_entry = actions_state.get_selected_entry()
+  file_browser.exports.file_browser({
+    prompt_title = string.format("File browser (%s)", selected_entry.name),
+    cwd = selected_entry.path,
+    attach_mappings = attach_mappings,
+  })
+end
+
 function M.default_action_replace(prompt_bufnr)
   actions.select_default:replace(function()
     local selected_entry = actions_state.get_selected_entry()

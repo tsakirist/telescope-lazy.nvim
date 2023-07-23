@@ -1,5 +1,3 @@
-local M = {}
-
 local config = require("telescope.config").values
 local entry_display = require("telescope.pickers.entry_display")
 local finders = require("telescope.finders")
@@ -9,6 +7,8 @@ local previewers = require("telescope.previewers")
 local telescope_lazy_actions = require("telescope._extensions.lazy.actions")
 local telescope_lazy_config = require("telescope._extensions.lazy.config")
 local telescope_lazy_plugins = require("telescope._extensions.lazy.plugins").plugins()
+
+local M = {}
 
 local function get_max_plugin_name_width()
   local max_plugin_name_width = 0

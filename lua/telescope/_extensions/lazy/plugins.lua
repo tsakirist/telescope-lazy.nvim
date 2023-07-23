@@ -3,7 +3,7 @@ if not pcall(require, "lazy") then
 end
 
 local lazy_config = require("lazy.core.config")
-local util = require("telescope._extensions.lazy.utils")
+local utils = require("telescope._extensions.lazy.utils")
 
 local M = {}
 
@@ -24,7 +24,7 @@ local function find_readme(path)
       if index then
         local n = string.sub(name, 1, index - 1)
         if string.lower(n) == "readme" then
-          readme = util.join_paths(path, name)
+          readme = utils.join_paths(path, name)
           break
         end
       end
@@ -37,8 +37,9 @@ end
 ---@alias Plugin {name:string, path: string, readme: string, url: string, lazy: boolean, icon: string}
 
 --- Returns a table describing the plugins installed via the lazy package manager.
----@return table<Plugin>: A table with plugin properties.
+---@return table<Plugin>: A table containing information about installed plugins.
 function M.plugins()
+  ---@type table<Plugin>
   local plugins = {}
 
   for _, plugin in pairs(lazy_config.plugins) do

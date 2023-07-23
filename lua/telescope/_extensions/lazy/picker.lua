@@ -26,7 +26,8 @@ function M.lazy_plugins_picker()
   local function displayer()
     local items = {
       { width = get_max_plugin_name_width() },
-      { remaining = true },
+      { width = 7 },
+      { width = 5 },
     }
 
     if opts.show_icon then
@@ -43,6 +44,7 @@ function M.lazy_plugins_picker()
     local display = {
       { entry.name },
       { entry.lazy and "(lazy)" or "(start)", "Comment" },
+      { entry.dev and "(dev)" or "", "Comment" },
     }
 
     if opts.show_icon then
@@ -68,6 +70,7 @@ function M.lazy_plugins_picker()
       readme = entry.readme,
       url = entry.url,
       lazy = entry.lazy,
+      dev = entry.dev,
       icon = entry.icon,
       ordinal = entry.name,
       display = make_display,

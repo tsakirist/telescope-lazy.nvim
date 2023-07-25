@@ -46,8 +46,11 @@ local function create_plugin_from_lazy(lazy_plugin)
   plugin.readme = find_readme(plugin.path)
   plugin.url = lazy_plugin.url
   plugin.lazy = lazy_plugin.lazy
-  plugin.dev = lazy_plugin.dev
   plugin.icon = ""
+
+  -- Use LazyPluginState `_` for determining whether the plugin is `dev` or not, instead of the `dev` field.
+  -- This also accounts for plugins that use the `dir` option in their plugin specification.
+  plugin.dev = lazy_plugin._.is_local
 
   return plugin
 end

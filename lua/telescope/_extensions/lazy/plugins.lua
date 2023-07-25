@@ -41,9 +41,7 @@ local function create_plugin_from_lazy(lazy_plugin)
   ---@type Plugin
   local plugin = {}
 
-  local base_plugin_path = lazy_plugin.dev and lazy_config.options.dev.path or lazy_config.options.root
-
-  plugin.path = utils.join_paths(base_plugin_path, lazy_plugin.name)
+  plugin.path = lazy_plugin.dir
   plugin.name = lazy_plugin.name
   plugin.readme = find_readme(plugin.path)
   plugin.url = lazy_plugin.url

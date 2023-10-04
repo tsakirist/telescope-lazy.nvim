@@ -15,8 +15,16 @@ local function warn_no_selection_action()
   )
 end
 
+local function get_selected_entry()
+  local selected_entry = actions_state.get_selected_entry()
+  if not selected_entry then
+    warn_no_selection_action()
+  end
+  return selected_entry
+end
+
 local function attach_mappings(_, map)
-  map({ "i", "n" }, telescope_lazy_config.opts.mappings.open_plugins_picker, function()
+  map({ "n", "i" }, telescope_lazy_config.opts.mappings.open_plugins_picker, function()
     builtin.resume()
   end)
   return true
@@ -41,11 +49,11 @@ function M.open_in_browser()
       { title = telescope_lazy_config.extension_name }
     )
   else
-    local selected_entry = actions_state.get_selected_entry()
+    local selected_entry = get_selected_entry()
     if not selected_entry then
-      warn_no_selection_action()
       return
     end
+
     local ret = vim.fn.jobstart({ open_cmd, selected_entry.url }, { detach = true })
     if ret <= 0 then
       vim.notify(
@@ -74,11 +82,11 @@ function M.open_lazy_root_live_grep()
 end
 
 function M.open_in_find_files()
-  local selected_entry = actions_state.get_selected_entry()
+  local selected_entry = get_selected_entry()
   if not selected_entry then
-    warn_no_selection_action()
     return
   end
+
   builtin.find_files({
     prompt_title = string.format("Find files (%s)", selected_entry.name),
     cwd = selected_entry.path,
@@ -87,11 +95,11 @@ function M.open_in_find_files()
 end
 
 function M.open_in_live_grep()
-  local selected_entry = actions_state.get_selected_entry()
+  local selected_entry = get_selected_entry()
   if not selected_entry then
-    warn_no_selection_action()
     return
   end
+
   builtin.live_grep({
     prompt_title = string.format("Grep files (%s)", selected_entry.name),
     cwd = selected_entry.path,
@@ -109,11 +117,12 @@ function M.open_in_file_browser()
     )
     return
   end
-  local selected_entry = actions_state.get_selected_entry()
+
+  local selected_entry = get_selected_entry()
   if not selected_entry then
-    warn_no_selection_action()
     return
   end
+
   file_browser.exports.file_browser({
     prompt_title = string.format("File browser (%s)", selected_entry.name),
     cwd = selected_entry.path,
@@ -123,11 +132,11 @@ end
 
 function M.default_action_replace(prompt_bufnr)
   actions.select_default:replace(function()
-    local selected_entry = actions_state.get_selected_entry()
+    local selected_entry = get_selected_entry()
     if not selected_entry then
-      warn_no_selection_action()
       return
     end
+
     if selected_entry.readme then
       actions.close(prompt_bufnr)
       vim.cmd.edit(selected_entry.readme)

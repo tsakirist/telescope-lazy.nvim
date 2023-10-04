@@ -82,7 +82,7 @@ function M:set_terminal_keymaps(resume_picker)
   }
 
   vim.keymap.set("t", "<C-q>", function()
-    vim.cmd.quit({ bang = true })
+    self:close()
   end, opts)
 
   vim.keymap.set("t", telescope_lazy_config.opts.mappings.open_plugins_picker, function()

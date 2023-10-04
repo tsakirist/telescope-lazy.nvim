@@ -45,9 +45,21 @@ require("telescope").setup({
         open_in_file_browser = "<M-b>",
         open_in_find_files = "<C-f>",
         open_in_live_grep = "<C-g>",
+        open_in_terminal = "<C-t>",
         open_plugins_picker = "<C-b>", -- Works only after having called first another action
         open_lazy_root_find_files = "<C-r>f",
         open_lazy_root_live_grep = "<C-r>g",
+      },
+      -- Configuration that will be passed to the window that hosts the terminal
+      -- For more configuration options check 'nvim_open_win()'
+      terminal_opts = {
+        relative = "editor",
+        style = "minimal",
+        border = "rounded",
+        title = "Telescope lazy",
+        title_pos = "center",
+        width = 0.5,
+        height = 0.5,
       },
       -- Other telescope configuration options
     },
@@ -69,6 +81,7 @@ require("telescope").load_extension "lazy"
 | `<M-b>`  | Open selected plugin with file-browser                                        |
 | `<C-f>`  | Open selected plugin with find files                                          |
 | `<C-g>`  | Open selected plugin with live grep                                           |
+| `<C-t>`  | Open selected plugin in a terminal                                            |
 | `<C-b>`  | Open lazy plugins picker, works only after having called first another action |
 | `<C-r>f` | Open lazy root with find files                                                |
 | `<C-r>g` | Open lazy root with live grep                                                 |

@@ -7,6 +7,8 @@ local builtin = require("telescope.builtin")
 local telescope_lazy_config = require("telescope._extensions.lazy.config")
 local lazy_options = require("lazy.core.config").options
 
+local floating_window = require("telescope._extensions.lazy.floating_window")
+
 local function warn_no_selection_action()
   vim.notify(
     "Please make a valid selection before performing the action.",
@@ -28,6 +30,16 @@ local function attach_mappings(_, map)
     builtin.resume()
   end)
   return true
+end
+
+function M.open_in_terminal()
+  local selected_entry = get_selected_entry()
+  if not selected_entry then
+    return
+  end
+
+  local window = floating_window.new()
+  window:open_terminal(selected_entry.path, builtin.resume)
 end
 
 function M.open_in_browser()

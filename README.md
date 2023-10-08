@@ -6,7 +6,7 @@ provides handy functionality about plugins installed via
 
 ## Demo
 
-[Demo.webm](https://user-images.githubusercontent.com/20475201/209448481-84bbd8a5-9d42-46be-bc46-18a481803474.webm)
+[Telescope-lazy-demo.webm](https://github.com/tsakirist/telescope-lazy.nvim/assets/20475201/d5f2a772-b45d-422f-b566-1d92359f7dba)
 
 ## Requirements
 

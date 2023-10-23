@@ -15,7 +15,7 @@ M.defaults = {
     open_plugins_picker = "<C-b>",
     open_lazy_root_find_files = "<C-r>f",
     open_lazy_root_live_grep = "<C-r>g",
-    change_directory_to_plugin = "<C-c>d",
+    change_cwd_to_plugin = "<C-c>d",
   },
   terminal_opts = {
     relative = "editor",

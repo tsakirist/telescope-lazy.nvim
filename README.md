@@ -49,7 +49,7 @@ require("telescope").setup({
         open_plugins_picker = "<C-b>", -- Works only after having called first another action
         open_lazy_root_find_files = "<C-r>f",
         open_lazy_root_live_grep = "<C-r>g",
-        change_directory_to_plugin = "<C-c>d",
+        change_cwd_to_plugin = "<C-c>d",
       },
       -- Configuration that will be passed to the window that hosts the terminal
       -- For more configuration options check 'nvim_open_win()'

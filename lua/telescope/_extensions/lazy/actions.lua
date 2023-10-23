@@ -32,7 +32,7 @@ local function attach_mappings(_, map)
   return true
 end
 
-function M.change_directory_to_plugin()
+function M.change_cwd_to_plugin()
   local selected_entry = get_selected_entry()
   if not selected_entry then
     return

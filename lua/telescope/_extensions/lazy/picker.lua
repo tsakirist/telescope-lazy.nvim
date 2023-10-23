@@ -90,7 +90,9 @@ function M.lazy_plugins_picker()
 
     local modes = { "n", "i" }
     for action, keymap in pairs(opts.mappings) do
-      map(modes, keymap, telescope_lazy_actions[action])
+      if keymap ~= "" and telescope_lazy_actions[action] ~= nil then
+        map(modes, keymap, telescope_lazy_actions[action])
+      end
     end
 
     return true

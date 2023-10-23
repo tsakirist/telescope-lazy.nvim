@@ -38,6 +38,10 @@ function M.change_cwd_to_plugin()
     return
   end
 
+  if vim.fn.getcwd() == selected_entry.path then
+    return
+  end
+
   local ok, res = pcall(vim.cmd.cd, selected_entry.path)
   if ok then
     vim.notify(

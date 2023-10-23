@@ -32,6 +32,28 @@ local function attach_mappings(_, map)
   return true
 end
 
+function M.change_directory_to_plugin()
+  local selected_entry = get_selected_entry()
+  if not selected_entry then
+    return
+  end
+
+  local ok, res = pcall(vim.cmd.cd, selected_entry.path)
+  if ok then
+    vim.notify(
+      string.format("Changed cwd to: '%s'.", selected_entry.path),
+      vim.log.levels.INFO,
+      { title = telescope_lazy_config.extension_name }
+    )
+  else
+    vim.notify(
+      string.format("Could not change cwd to: '%s'.\nError: '%s'" .. selected_entry.path, res),
+      vim.log.levels.ERROR,
+      { title = telescope_lazy_config.extension_name }
+    )
+  end
+end
+
 function M.open_in_terminal()
   local selected_entry = get_selected_entry()
   if not selected_entry then

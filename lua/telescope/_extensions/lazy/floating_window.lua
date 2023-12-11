@@ -13,14 +13,26 @@ end
 
 function M:init(opts)
   self.win_opts = vim.tbl_deep_extend("force", telescope_lazy_config.opts.terminal_opts, opts or {})
-  self:create_window()
+  self:create()
   self:focus()
   return self
+end
+
+function M:create()
+  local win_opts = self:get_window_dimensions()
+  self.buf = vim.api.nvim_create_buf(false, true)
+  self.win = vim.api.nvim_open_win(self.buf, false, win_opts)
 end
 
 function M:close()
   if self:win_is_valid() then
     vim.api.nvim_win_close(self.win, true)
+  end
+end
+
+function M:focus()
+  if self:win_is_valid() then
+    vim.api.nvim_set_current_win(self.win)
   end
 end
 
@@ -30,16 +42,6 @@ end
 
 function M:buf_is_valid()
   return self.buf and vim.api.nvim_buf_is_valid(self.buf)
-end
-
-function M:focus()
-  vim.api.nvim_set_current_win(self.win)
-end
-
-function M:create_window()
-  local win_opts = self:get_window_dimensions()
-  self.buf = vim.api.nvim_create_buf(false, true)
-  self.win = vim.api.nvim_open_win(self.buf, false, win_opts)
 end
 
 function M:get_window_dimensions()

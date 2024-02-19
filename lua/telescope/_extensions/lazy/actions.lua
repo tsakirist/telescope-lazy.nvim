@@ -32,6 +32,11 @@ local function attach_mappings(_, map)
   return true
 end
 
+local live_grep = (function()
+  local ok, egrepify = pcall(require, "telescope._extensions.egrepify")
+  return ok and egrepify.exports.egrepify or builtin.live_grep
+end)()
+
 function M.change_cwd_to_plugin()
   local selected_entry = get_selected_entry()
   if not selected_entry then
@@ -112,7 +117,7 @@ function M.open_lazy_root_find_files()
 end
 
 function M.open_lazy_root_live_grep()
-  builtin.live_grep({
+  live_grep({
     prompt_title = "Grep files in lazy root",
     cwd = lazy_options.root,
     attach_mappings = attach_mappings,
@@ -138,7 +143,7 @@ function M.open_in_live_grep()
     return
   end
 
-  builtin.live_grep({
+  live_grep({
     prompt_title = string.format("Grep files (%s)", selected_entry.name),
     cwd = selected_entry.path,
     attach_mappings = attach_mappings,

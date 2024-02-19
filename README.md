@@ -18,6 +18,7 @@ Required:
 Optional:
 
 - [telescope-file-browser.nvim](https://github.com/nvim-telescope/telescope-file-browser.nvim)
+- [telescope-egrepify.nvim](https://github.com/fdschmidt93/telescope-egrepify.nvim)
 
 ## Installation
 
@@ -81,11 +82,11 @@ require("telescope").load_extension "lazy"
 | `<C-o>`  | Open selected plugin repository in browser                                    |
 | `<M-b>`  | Open selected plugin with file-browser                                        |
 | `<C-f>`  | Open selected plugin with find files                                          |
-| `<C-g>`  | Open selected plugin with live grep                                           |
+| `<C-g>`  | Open selected plugin with live grep (will use `egrepify` if installed)        |
 | `<C-t>`  | Open selected plugin in a terminal                                            |
 | `<C-b>`  | Open lazy plugins picker, works only after having called first another action |
 | `<C-r>f` | Open lazy root with find files                                                |
-| `<C-r>g` | Open lazy root with live grep                                                 |
+| `<C-r>g` | Open lazy root with live grep (will use `egrepify` if installed)              |
 | `<C-c>d` | Change the current working directory to the path of the selected plugin       |
 
 ## Acknowledgments

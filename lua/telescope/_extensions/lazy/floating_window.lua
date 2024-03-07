@@ -12,7 +12,7 @@ function M.new(opts)
 end
 
 function M:init(opts)
-  self.win_opts = vim.tbl_deep_extend("force", telescope_lazy_config.opts.terminal_opts, opts or {})
+  self._win_opts = vim.tbl_deep_extend("force", telescope_lazy_config.opts.terminal_opts, opts or {})
   self:create()
   self:focus()
   return self
@@ -45,52 +45,12 @@ function M:buf_is_valid()
 end
 
 function M:get_window_dimensions()
-  local win_opts = self.win_opts
-  win_opts.height = math.floor(vim.o.lines * self.win_opts.height)
-  win_opts.width = math.floor(vim.o.columns * self.win_opts.width)
+  local win_opts = self._win_opts
+  win_opts.height = math.floor(vim.o.lines * self._win_opts.height)
+  win_opts.width = math.floor(vim.o.columns * self._win_opts.width)
   win_opts.row = math.floor((vim.o.lines - win_opts.height) / 2)
   win_opts.col = math.floor((vim.o.columns - win_opts.width) / 2)
   return win_opts
-end
-
-function M:open_terminal(path, resume_picker)
-  local ret = vim.fn.termopen(vim.o.shell, {
-    cwd = path,
-    on_exit = function()
-      self:close()
-    end,
-  })
-
-  if ret <= 0 then
-    vim.notify(
-      string.format("Failed to open terminal with cwd: '%s' (ret: '%d')", path, ret),
-      vim.log.levels.ERROR,
-      { title = telescope_lazy_config.extension_name }
-    )
-    return
-  end
-
-  self:set_terminal_keymaps(resume_picker)
-
-  vim.schedule(function()
-    vim.cmd.startinsert()
-  end)
-end
-
-function M:set_terminal_keymaps(resume_picker)
-  local opts = {
-    nowait = true,
-    buffer = self.buf,
-  }
-
-  vim.keymap.set("t", "<C-q>", function()
-    self:close()
-  end, opts)
-
-  vim.keymap.set("t", telescope_lazy_config.opts.mappings.open_plugins_picker, function()
-    self:close()
-    resume_picker()
-  end, opts)
 end
 
 return M

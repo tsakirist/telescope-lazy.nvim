@@ -4,10 +4,9 @@ local actions = require("telescope.actions")
 local actions_state = require("telescope.actions.state")
 local builtin = require("telescope.builtin")
 
-local telescope_lazy_config = require("telescope._extensions.lazy.config")
 local lazy_options = require("lazy.core.config").options
-
-local floating_window = require("telescope._extensions.lazy.floating_window")
+local telescope_lazy_config = require("telescope._extensions.lazy.config")
+local telescope_lazy_terminal = require("telescope._extensions.lazy.terminal")
 
 local function warn_no_selection_action()
   vim.notify(
@@ -69,8 +68,8 @@ function M.open_in_terminal()
     return
   end
 
-  local window = floating_window.new()
-  window:open_terminal(selected_entry.path, builtin.resume)
+  local terminal = telescope_lazy_terminal.new()
+  terminal:open(selected_entry.path, builtin.resume)
 end
 
 function M.open_in_browser()

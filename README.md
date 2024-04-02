@@ -63,6 +63,12 @@ require("telescope").setup({
         width = 0.5,
         height = 0.5,
       },
+      actions_opts = {
+        open_in_browser = {
+          -- Close the telescope window when opening in browser
+          auto_close = false,
+        },
+      }
       -- Other telescope configuration options
     },
   },

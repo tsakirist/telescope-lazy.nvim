@@ -26,6 +26,11 @@ M.defaults = {
     width = 0.5,
     height = 0.5,
   },
+  actions_opts = {
+    open_in_browser = {
+      auto_close = false,
+    },
+  },
 }
 
 M.opts = {}

@@ -72,7 +72,7 @@ function M.open_in_terminal()
   terminal:open(selected_entry.path, builtin.resume)
 end
 
-function M.open_in_browser()
+function M.open_in_browser(prompt_bufnr)
   local open_cmd
   if vim.fn.executable("xdg-open") == 1 then
     open_cmd = "xdg-open"
@@ -103,6 +103,10 @@ function M.open_in_browser()
         vim.log.levels.ERROR,
         { title = telescope_lazy_config.extension_name }
       )
+    end
+
+    if telescope_lazy_config.opts.actions_opts.open_in_browser.auto_close then
+      actions.close(prompt_bufnr)
     end
   end
 end

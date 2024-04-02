@@ -17,6 +17,14 @@ M.defaults = {
     open_lazy_root_live_grep = "<C-r>g",
     change_cwd_to_plugin = "<C-c>d",
   },
+  actions_opts = {
+    open_in_browser = {
+      auto_close = false,
+    },
+    change_cwd_to_plugin = {
+      auto_close = false,
+    },
+  },
   terminal_opts = {
     relative = "editor",
     style = "minimal",
@@ -25,11 +33,6 @@ M.defaults = {
     title_pos = "center",
     width = 0.5,
     height = 0.5,
-  },
-  actions_opts = {
-    open_in_browser = {
-      auto_close = false,
-    },
   },
 }
 

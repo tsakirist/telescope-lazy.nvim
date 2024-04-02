@@ -52,6 +52,17 @@ require("telescope").setup({
         open_lazy_root_live_grep = "<C-r>g",
         change_cwd_to_plugin = "<C-c>d",
       },
+      -- Extra configuration options for the actions
+      actions_opts = {
+        open_in_browser = {
+          -- Close the telescope window after the action is executed
+          auto_close = false,
+        },
+        change_cwd_to_plugin = {
+          -- Close the telescope window after the action is executed
+          auto_close = false,
+        },
+      },
       -- Configuration that will be passed to the window that hosts the terminal
       -- For more configuration options check 'nvim_open_win()'
       terminal_opts = {
@@ -63,12 +74,6 @@ require("telescope").setup({
         width = 0.5,
         height = 0.5,
       },
-      actions_opts = {
-        open_in_browser = {
-          -- Close the telescope window when opening in browser
-          auto_close = false,
-        },
-      }
       -- Other telescope configuration options
     },
   },

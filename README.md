@@ -94,7 +94,7 @@ require("telescope").load_extension "lazy"
 | -------- | ----------------------------------------------------------------------------- |
 | `<C-o>`  | Open selected plugin repository in browser                                    |
 | `<M-b>`  | Open selected plugin with file-browser                                        |
-| `<M-f>`  | Open selected plugin with mini.files                                         |
+| `<M-f>`  | Open selected plugin with mini.files                                          |
 | `<C-f>`  | Open selected plugin with find files                                          |
 | `<C-g>`  | Open selected plugin with live grep (will use `egrepify` if installed)        |
 | `<C-t>`  | Open selected plugin in a terminal                                            |

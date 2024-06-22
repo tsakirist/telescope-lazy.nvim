@@ -180,6 +180,25 @@ function M.open_in_file_browser()
   })
 end
 
+function M.open_in_mini_files()
+  local ok, mini = pcall(require, "mini.files")
+  if not ok then
+    vim.notify(
+      "This action requires 'mini.files'. (https://github.com/echasnovski/mini.files)",
+      vim.log.levels.ERROR,
+      { title = telescope_lazy_config.extension_name }
+    )
+    return
+  end
+
+  local selected_entry = get_selected_entry()
+  if not selected_entry then
+    return
+  end
+
+  mini.open(selected_entry.path)
+end
+
 function M.default_action_replace(prompt_bufnr)
   actions.select_default:replace(function()
     local selected_entry = get_selected_entry()

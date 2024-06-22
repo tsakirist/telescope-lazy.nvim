@@ -9,6 +9,7 @@ M.defaults = {
   mappings = {
     open_in_browser = "<C-o>",
     open_in_file_browser = "<M-b>",
+    open_in_mini_files = "<M-f>",
     open_in_find_files = "<C-f>",
     open_in_live_grep = "<C-g>",
     open_in_terminal = "<C-t>",

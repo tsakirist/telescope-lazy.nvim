@@ -19,6 +19,7 @@ Optional:
 
 - [telescope-file-browser.nvim](https://github.com/nvim-telescope/telescope-file-browser.nvim)
 - [telescope-egrepify.nvim](https://github.com/fdschmidt93/telescope-egrepify.nvim)
+- [mini.files](https://github.com/echasnovski/mini.files)
 
 ## Installation
 
@@ -44,6 +45,7 @@ require("telescope").setup({
       mappings = {
         open_in_browser = "<C-o>",
         open_in_file_browser = "<M-b>",
+        open_in_mini_files = "<M-f>",
         open_in_find_files = "<C-f>",
         open_in_live_grep = "<C-g>",
         open_in_terminal = "<C-t>",
@@ -92,6 +94,7 @@ require("telescope").load_extension "lazy"
 | -------- | ----------------------------------------------------------------------------- |
 | `<C-o>`  | Open selected plugin repository in browser                                    |
 | `<M-b>`  | Open selected plugin with file-browser                                        |
+| `<M-f>`  | Open selected plugin with mini.files                                         |
 | `<C-f>`  | Open selected plugin with find files                                          |
 | `<C-g>`  | Open selected plugin with live grep (will use `egrepify` if installed)        |
 | `<C-t>`  | Open selected plugin in a terminal                                            |

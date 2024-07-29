@@ -39,6 +39,7 @@ end
 ---@return Plugin: An internal representation of the LazyPlugin as a Plugin.
 local function create_plugin_from_lazy(lazy_plugin)
   ---@type Plugin
+  ---@diagnostic disable-next-line: missing-fields
   local plugin = {}
 
   plugin.path = lazy_plugin.dir

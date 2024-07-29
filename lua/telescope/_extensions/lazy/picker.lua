@@ -7,25 +7,16 @@ local previewers = require("telescope.previewers")
 local telescope_lazy_actions = require("telescope._extensions.lazy.actions")
 local telescope_lazy_config = require("telescope._extensions.lazy.config")
 local telescope_lazy_plugins = require("telescope._extensions.lazy.plugins").plugins()
+local utils = require("telescope._extensions.lazy.utils")
 
 local M = {}
-
-local function get_max_plugin_name_width()
-  local max_plugin_name_width = 0
-  for _, plugin in ipairs(telescope_lazy_plugins) do
-    if #plugin.name > max_plugin_name_width then
-      max_plugin_name_width = #plugin.name
-    end
-  end
-  return max_plugin_name_width
-end
 
 function M.lazy_plugins_picker()
   local opts = telescope_lazy_config.opts
 
   local function displayer()
     local items = {
-      { width = get_max_plugin_name_width() },
+      { width = utils.max_plugin_name_length(telescope_lazy_plugins) },
       { width = 7 },
       { width = 5 },
     }

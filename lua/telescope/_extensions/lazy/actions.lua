@@ -21,7 +21,7 @@ local function get_selected_entry()
   if not selected_entry then
     warn_no_selection_action()
   end
-  return selected_entry
+  return selected_entry.value
 end
 
 local function attach_mappings(_, map)

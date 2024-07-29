@@ -33,46 +33,46 @@ function M.lazy_plugins_picker()
 
   local function make_display(entry)
     local display = {
-      { entry.name },
-      { entry.lazy and "(lazy)" or "(start)", "Comment" },
-      { entry.dev and "(dev)" or "", "Comment" },
+      { entry.value.name },
+      { entry.value.lazy and "(lazy)" or "(start)", "Comment" },
+      { entry.value.dev and "(dev)" or "", "Comment" },
     }
 
     if opts.show_icon then
-      table.insert(display, 1, { entry.icon, "SpecialChar" })
+      table.insert(display, 1, { entry.value.icon, "SpecialChar" })
     end
 
     return displayer()(display)
   end
 
-  local function previewer(entry, bufnr)
-    if entry.readme then
-      local readme = vim.fn.readfile(entry.readme)
-      vim.api.nvim_buf_set_option(bufnr, "filetype", "markdown")
-      vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, readme)
-    end
-  end
-
-  local function entry_maker(entry)
-    return {
-      value = entry,
-      name = entry.name,
-      path = entry.path,
-      readme = entry.readme,
-      url = entry.url,
-      lazy = entry.lazy,
-      dev = entry.dev,
-      icon = entry.icon,
-      ordinal = entry.name,
-      display = make_display,
-      preview_command = previewer,
-    }
+  local function previewer()
+    return previewers.new_buffer_previewer({
+      title = "[ Readme ]",
+      dyn_title = function(_, entry)
+        return "[ " .. entry.value.name .. " ]"
+      end,
+      define_preview = function(self, entry, status)
+        if not entry.value.readme then
+          return
+        end
+        vim.api.nvim_set_option_value("wrap", true, { win = status.preview_win })
+        config.buffer_previewer_maker(entry.value.readme, self.state.bufnr, {
+          winid = self.state.winid,
+        })
+      end,
+    })
   end
 
   local function finder()
     return finders.new_table({
       results = telescope_lazy_plugins,
-      entry_maker = entry_maker,
+      entry_maker = function(entry)
+        return {
+          value = entry,
+          ordinal = entry.name,
+          display = make_display,
+        }
+      end,
     })
   end
 
@@ -95,7 +95,7 @@ function M.lazy_plugins_picker()
       results_title = "Installed plugins",
       finder = finder(),
       sorter = config.file_sorter(opts),
-      previewer = previewers.display_content.new(opts),
+      previewer = previewer(),
       attach_mappings = attach_mappings,
     })
     :find()

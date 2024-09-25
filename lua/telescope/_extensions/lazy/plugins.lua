@@ -13,9 +13,9 @@ local M = {}
 local function find_readme(path)
   local readme = nil
 
-  local handle = vim.loop.fs_scandir(path)
+  local handle = vim.uv.fs_scandir(path)
   while handle do
-    local name, type = vim.loop.fs_scandir_next(handle)
+    local name, type = vim.uv.fs_scandir_next(handle)
     if not name then
       break
     end

@@ -4,6 +4,7 @@ local M = {}
 
 M.extension_name = "Telescope lazy"
 
+---@type TelescopeLazy.Config
 M.defaults = {
   show_icon = true,
   mappings = {
@@ -36,22 +37,26 @@ M.defaults = {
   },
 }
 
+---@type TelescopeLazy.Config
 M.opts = {}
 
-function M.setup(user_opts)
-  user_opts = user_opts or {}
-  if user_opts.theme and string.len(user_opts.theme) > 0 then
-    if not themes["get_" .. user_opts.theme] then
+---@param opts? TelescopeLazy.Config
+function M.setup(opts)
+  opts = opts or {}
+
+  if opts.theme and string.len(opts.theme) > 0 then
+    if not themes["get_" .. opts.theme] then
       vim.notify(
-        string.format("Could not apply provided telescope theme: '%s'", user_opts.theme),
+        string.format("Could not apply provided telescope theme: '%s'", opts.theme),
         vim.log.levels.WARN,
         { title = M.extension_name }
       )
     else
-      user_opts = themes["get_" .. user_opts.theme](user_opts)
+      opts = themes["get_" .. opts.theme](opts)
     end
   end
-  M.opts = vim.tbl_deep_extend("force", M.defaults, user_opts)
+
+  M.opts = vim.tbl_deep_extend("force", M.defaults, opts)
 end
 
 return M

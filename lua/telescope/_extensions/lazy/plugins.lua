@@ -35,10 +35,10 @@ local function find_readme(path)
 end
 
 --- Creates an internal representation of a LazyPlugin.
----@param lazy_plugin any: An instance of a LazyPlugin.
----@return Plugin: An internal representation of the LazyPlugin as a Plugin.
+---@param lazy_plugin LazyPlugin: An instance of a LazyPlugin.
+---@return TelescopeLazy.Plugin: An internal representation of the LazyPlugin as a Plugin.
 local function create_plugin_from_lazy(lazy_plugin)
-  ---@type Plugin
+  ---@type TelescopeLazy.Plugin
   ---@diagnostic disable-next-line: missing-fields
   local plugin = {}
 
@@ -57,9 +57,9 @@ local function create_plugin_from_lazy(lazy_plugin)
 end
 
 --- Returns a table describing the plugins installed via the lazy package manager.
----@return table<Plugin>: A table containing information about installed plugins.
+---@return table<TelescopeLazy.Plugin>: A table containing information about installed plugins.
 function M.plugins()
-  ---@type table<Plugin>
+  ---@type table<TelescopeLazy.Plugin>
   local plugins = {}
 
   for _, lazy_plugin in pairs(lazy_config.plugins) do

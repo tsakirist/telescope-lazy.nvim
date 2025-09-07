@@ -18,11 +18,12 @@ function M:init(opts)
 end
 
 function M:open(path, resume_picker)
-  local ret = vim.fn.termopen(vim.o.shell, {
+  local ret = vim.fn.jobstart({ vim.o.shell }, {
     cwd = path,
     on_exit = function()
       self:close()
     end,
+    term = true,
   })
 
   if ret <= 0 then

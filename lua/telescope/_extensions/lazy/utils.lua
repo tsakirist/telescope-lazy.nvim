@@ -11,7 +11,7 @@ function M.join_paths(...)
 end
 
 --- Finds the length of the longest plugin name.
----@param plugins table<Plugin>: A table with all the plugins.
+---@param plugins table<TelescopeLazy.Plugin>: A table with all the plugins.
 ---@return number: The length of the longest plugin name.
 function M.max_plugin_name_length(plugins)
   local max_length = 0

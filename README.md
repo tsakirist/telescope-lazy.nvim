@@ -161,13 +161,13 @@ local defaults = {
 ---@class TelescopeLazy.ActionOpts
 ---@field auto_close? boolean Automatically close the telescope window after the action is executed.
 
----@class TelescopeLazy.OpenPluginConfigOpts
+---@class TelescopeLazy.SearchPluginConfigOpts
 ---@field config_search_path? string Path to search for plugin configs, relative to stdpath('config')
 
 ---@class TelescopeLazy.ActionsOpts
 ---@field open_in_browser TelescopeLazy.ActionOpts
 ---@field change_cwd_to_plugin TelescopeLazy.ActionOpts
----@field search_plugin_config TelescopeLazy.OpenPluginConfigOpts
+---@field search_plugin_config TelescopeLazy.SearchPluginConfigOpts
 ```
 
 </details>

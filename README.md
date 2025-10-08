@@ -62,6 +62,9 @@ require("telescope").setup({
         change_cwd_to_plugin = {
           auto_close = false,
         },
+        search_plugin_config = {
+          config_search_path = "lua/plugins", -- Path to search for plugin configs, relative to stdpath('config')
+        },
       },
       terminal_opts = {
         relative = "editor",
@@ -110,6 +113,10 @@ local defaults = {
       -- Close the telescope window after the action is executed
       auto_close = false,
     },
+    search_plugin_config = {
+      -- Path to search for plugin configs, relative to stdpath('config')
+      config_search_path = "lua/plugins",
+    },
   },
   -- Configuration that will be passed to the window that hosts the terminal
   -- For more configuration options check 'nvim_open_win()'
@@ -154,9 +161,13 @@ local defaults = {
 ---@class TelescopeLazy.ActionOpts
 ---@field auto_close? boolean Automatically close the telescope window after the action is executed.
 
+---@class TelescopeLazy.OpenPluginConfigOpts
+---@field config_search_path? string Path to search for plugin configs, relative to stdpath('config')
+
 ---@class TelescopeLazy.ActionsOpts
 ---@field open_in_browser TelescopeLazy.ActionOpts
 ---@field change_cwd_to_plugin TelescopeLazy.ActionOpts
+---@field search_plugin_config TelescopeLazy.OpenPluginConfigOpts
 ```
 
 </details>
@@ -174,6 +185,7 @@ local defaults = {
 | `<C-f>`  | Open selected plugin with find files                                          |
 | `<C-g>`  | Open selected plugin with live grep (will use `egrepify` if installed)        |
 | `<C-t>`  | Open selected plugin in a terminal                                            |
+| `<C-e>`  | Search for plugin configuration using live grep in the configured plugin config directory |
 | `<C-b>`  | Open lazy plugins picker, works only after having called first another action |
 | `<C-r>f` | Open lazy root with find files                                                |
 | `<C-r>g` | Open lazy root with live grep (will use `egrepify` if installed)              |

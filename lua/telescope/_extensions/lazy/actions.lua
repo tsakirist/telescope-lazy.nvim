@@ -180,6 +180,45 @@ function M.open_in_file_browser()
   })
 end
 
+function M.search_plugin_config()
+  local selected_entry = get_selected_entry()
+  if not selected_entry then
+    return
+  end
+
+  local plugin_name = selected_entry.name
+  local themes = require("telescope.themes")
+
+  -- Use the configured theme from telescope-lazy instead of hardcoded ivy
+  local opts = telescope_lazy_config.opts
+  local theme_func = nil
+
+  -- Check if a theme is configured
+  if opts.theme and opts.theme ~= "" and themes["get_" .. opts.theme] then
+    theme_func = themes["get_" .. opts.theme]
+  else
+    -- Identity function that just returns the options unchanged
+    theme_func = function(opts)
+      return opts
+    end
+  end
+
+  -- Get the search path from telescope-lazy config, defaulting to lua/plugins
+  local config_search_path = opts.actions_opts
+      and opts.actions_opts.search_plugin_config
+      and opts.actions_opts.search_plugin_config.config_search_path
+    or ""
+  local config_dir = vim.fn.stdpath("config") .. "/" .. config_search_path
+
+  -- Search for the plugin name in the configured directory using the configured theme
+  live_grep(theme_func({
+    prompt_title = string.format("Search %s in config files", plugin_name),
+    cwd = config_dir,
+    default_text = plugin_name,
+    attach_mappings = attach_mappings,
+  }))
+end
+
 function M.default_action_replace(prompt_bufnr)
   actions.select_default:replace(function()
     local selected_entry = get_selected_entry()

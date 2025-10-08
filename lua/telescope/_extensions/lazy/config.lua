@@ -17,6 +17,7 @@ M.defaults = {
     open_lazy_root_find_files = "<C-r>f",
     open_lazy_root_live_grep = "<C-r>g",
     change_cwd_to_plugin = "<C-c>d",
+    search_plugin_config = "<C-e>",
   },
   actions_opts = {
     open_in_browser = {
@@ -24,6 +25,9 @@ M.defaults = {
     },
     change_cwd_to_plugin = {
       auto_close = false,
+    },
+    search_plugin_config = {
+      config_search_path = "lua/plugins",
     },
   },
   terminal_opts = {

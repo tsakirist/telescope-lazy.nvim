@@ -1,4 +1,5 @@
 ---@class TelescopeLazy.Config
+---@field icon? string The icon to show on the first column of the picker.
 ---@field show_icon? boolean Whether or not to show the icon in the first column of the picker.
 ---@field mappings? TelescopeLazy.Mappings Mappings for the picker actions.
 ---@field actions_opts? TelescopeLazy.ActionsOpts Configuration options for the picker actions.
@@ -34,4 +35,3 @@
 ---@field url string
 ---@field lazy boolean
 ---@field dev boolean
----@field icon string

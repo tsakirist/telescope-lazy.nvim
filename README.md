@@ -40,6 +40,8 @@ require("telescope").setup({
     ---@module "telescope._extensions.lazy"
     ---@type TelescopeLazy.Config
     lazy = {
+      -- What icon to show on the first column of the picker
+      icon = "",
       -- Optional theme (the extension doesn't set a default theme)
       theme = "ivy",
       -- The below configuration options are the defaults
@@ -94,6 +96,8 @@ require("telescope").load_extension("lazy")
 ```lua
 ---@type TelescopeLazy.Config
 local defaults = {
+  -- What icon to show on the first column of the picker
+  icon = "",
   -- Whether or not to show the icon in the first column
   show_icon = true,
   -- Mappings for the actions
@@ -142,6 +146,7 @@ local defaults = {
 
 ```lua
 ---@class TelescopeLazy.Config
+---@field icon? string The icon to show on the first column of the picker.
 ---@field show_icon? boolean Whether or not to show the icon in the first column of the picker.
 ---@field mappings? TelescopeLazy.Mappings Mappings for the picker actions.
 ---@field actions_opts? TelescopeLazy.ActionsOpts Configuration options for the picker actions.

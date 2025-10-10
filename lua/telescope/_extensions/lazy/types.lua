@@ -3,8 +3,10 @@
 ---@field mappings? TelescopeLazy.Mappings Mappings for the picker actions.
 ---@field actions_opts? TelescopeLazy.ActionsOpts Configuration options for the picker actions.
 ---@field terminal_opts? vim.api.keyset.win_config Configuration for the terminal window action.
+---@field custom_actions? table<string, TelescopeLazy.CustomAction> Custom actions to be added to the picker.
 ---@field theme? TelescopeLazy.Theme The Telescope theme to use for the picker.
 
+---@alias TelescopeLazy.CustomAction fun(prompt_bufnr: integer, selected_entry: TelescopeLazy.Plugin)
 ---@alias TelescopeLazy.Theme "dropdown" | "cursor" |"ivy"
 
 ---@class TelescopeLazy.Mappings

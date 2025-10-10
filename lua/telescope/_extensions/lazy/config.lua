@@ -26,6 +26,7 @@ M.defaults = {
       auto_close = false,
     },
   },
+  custom_actions = {},
   terminal_opts = {
     relative = "editor",
     style = "minimal",

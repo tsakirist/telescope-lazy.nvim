@@ -180,6 +180,22 @@ function M.open_in_file_browser()
   })
 end
 
+function M.custom_action(prompt_bufnr, user_fn)
+  local selected_entry = get_selected_entry()
+  if not selected_entry then
+    return
+  end
+
+  local ok, res = pcall(user_fn, prompt_bufnr, selected_entry)
+  if not ok then
+    vim.notify(
+      string.format("Could not perform custom action %s", res),
+      vim.log.levels.ERROR,
+      { title = telescope_lazy_config.extension_name }
+    )
+  end
+end
+
 function M.default_action_replace(prompt_bufnr)
   actions.select_default:replace(function()
     local selected_entry = get_selected_entry()

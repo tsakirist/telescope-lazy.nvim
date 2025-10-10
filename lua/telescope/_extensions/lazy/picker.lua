@@ -80,10 +80,17 @@ function M.lazy_plugins_picker()
     telescope_lazy_actions.default_action_replace(prompt_bufnr)
 
     local modes = { "n", "i" }
+
     for action, keymap in pairs(opts.mappings) do
       if keymap ~= "" and telescope_lazy_actions[action] ~= nil then
         map(modes, keymap, telescope_lazy_actions[action])
       end
+    end
+
+    for keymap, user_fn in pairs(opts.custom_actions) do
+      map(modes, keymap, function()
+        telescope_lazy_actions.custom_action(prompt_bufnr, user_fn)
+      end)
     end
 
     return true

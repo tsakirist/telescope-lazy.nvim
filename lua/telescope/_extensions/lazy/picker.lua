@@ -39,7 +39,7 @@ function M.lazy_plugins_picker()
     }
 
     if opts.show_icon then
-      table.insert(display, 1, { entry.value.icon, "SpecialChar" })
+      table.insert(display, 1, { opts.icon, "SpecialChar" })
     end
 
     return displayer()(display)

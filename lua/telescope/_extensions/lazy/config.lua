@@ -6,6 +6,7 @@ M.extension_name = "Telescope lazy"
 
 ---@type TelescopeLazy.Config
 M.defaults = {
+  icon = "",
   show_icon = true,
   mappings = {
     open_in_browser = "<C-o>",
